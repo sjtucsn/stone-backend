@@ -1,16 +1,17 @@
 package com.fanggu.stone.dao;
 
 import com.fanggu.stone.model.User;
-import java.util.List;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer userId);
+    void insertUser(User user);
 
-    int insert(User record);
+    void updateUser(User user);
 
-    User selectByPrimaryKey(Integer userId);
+    void updateAvatar(User user);
 
-    List<User> selectAll();
+    User getUserById(int userId);
 
-    int updateByPrimaryKey(User record);
+    User getUserByTel(String userTel);
+
+    User getUserByLogin(String userTel, String password);
 }

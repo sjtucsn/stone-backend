@@ -11,11 +11,11 @@ public class User {
 
     private String userAddress;
 
-    private Byte userGender;
+    private int userGender;
 
-    private String passWord;
+    private String password;
 
-    private Byte userType;
+    private int userType;
 
     private String createTime;
 
@@ -61,27 +61,27 @@ public class User {
         this.userAddress = userAddress;
     }
 
-    public Byte getUserGender() {
+    public int getUserGender() {
         return userGender;
     }
 
-    public void setUserGender(Byte userGender) {
+    public void setUserGender(int userGender) {
         this.userGender = userGender;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Byte getUserType() {
+    public int getUserType() {
         return userType;
     }
 
-    public void setUserType(Byte userType) {
+    public void setUserType(int userType) {
         this.userType = userType;
     }
 

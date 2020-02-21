@@ -12,13 +12,13 @@ CREATE TABLE user (
     user_avatar VARCHAR(30),
     user_address VARCHAR(30),
     user_gender TINYINT(1) UNSIGNED, /* 1 男 0 女 */
-    pass_word CHAR(64), /* SHA-256算法加密的密码 */
+    password CHAR(64), /* SHA-256算法加密的密码 */
     user_type TINYINT(1) UNSIGNED, /* 1 方古管理员 0 普通用户 */
     create_time DATETIME DEFAULT NOW(),
     update_time TIMESTAMP
 );
 
-INSERT INTO user(user_name, user_tel, user_gender, pass_word, user_type) VALUES ('admin', '18202121916', 1, SHA2('123456', 256), 1);
+INSERT INTO user(user_name, user_tel, user_gender, password, user_type) VALUES ('admin', '18202121916', 1, SHA2('123456', 256), 1);
 
 CREATE TABLE category (
     category_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

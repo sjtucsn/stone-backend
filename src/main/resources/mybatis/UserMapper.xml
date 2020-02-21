@@ -1,52 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fanggu.stone.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="com.fanggu.stone.model.User">
-        <id column="user_id" jdbcType="INTEGER" property="userId" />
-        <result column="user_name" jdbcType="VARCHAR" property="userName" />
-        <result column="user_tel" jdbcType="CHAR" property="userTel" />
-        <result column="user_avatar" jdbcType="VARCHAR" property="userAvatar" />
-        <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
-        <result column="user_gender" jdbcType="TINYINT" property="userGender" />
-        <result column="pass_word" jdbcType="CHAR" property="passWord" />
-        <result column="user_type" jdbcType="TINYINT" property="userType" />
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    </resultMap>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from user
-        where user_id = #{userId,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.fanggu.stone.model.User">
-        insert into user (user_id, user_name, user_tel,
-                          user_avatar, user_address, user_gender,
-                          pass_word, user_type)
-        values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userTel,jdbcType=CHAR},
-                #{userAvatar,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userGender,jdbcType=TINYINT},
-                #{passWord,jdbcType=CHAR}, #{userType,jdbcType=TINYINT})
+    <insert id="insertUser" parameterType="User">
+        INSERT INTO user (user_name, user_tel, password, user_type)
+        VALUES (#{userName}, #{userTel}, #{password}, #{userType})
     </insert>
-    <update id="updateByPrimaryKey" parameterType="com.fanggu.stone.model.User">
-        update user
-        set user_name = #{userName,jdbcType=VARCHAR},
-            user_tel = #{userTel,jdbcType=CHAR},
-            user_avatar = #{userAvatar,jdbcType=VARCHAR},
-            user_address = #{userAddress,jdbcType=VARCHAR},
-            user_gender = #{userGender,jdbcType=TINYINT},
-            pass_word = #{passWord,jdbcType=CHAR},
-            user_type = #{userType,jdbcType=TINYINT},
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            update_time = #{updateTime,jdbcType=TIMESTAMP}
-        where user_id = #{userId,jdbcType=INTEGER}
+
+    <update id="updateUser" parameterType="User">
+        UPDATE user SET user_name = #{userName}, user_address = #{userAddress}, user_gender = #{userGender}
+        WHERE user_id = #{userId}
     </update>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select user_id, user_name, user_tel, user_avatar, user_address, user_gender, pass_word,
-               user_type, create_time, update_time
-        from user
-        where user_id = #{userId,jdbcType=INTEGER}
+
+    <update id="updateAvatar" parameterType="User">
+        UPDATE user SET user_avatar = #{userAvatar} WHERE user_id = #{userId}
+    </update>
+
+    <select id="getUserById" resultType="User">
+        SELECT user_id, user_name, user_tel, user_avatar, user_address, user_gender FROM user
+        WHERE user_id = #{user_id}
     </select>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select user_id, user_name, user_tel, user_avatar, user_address, user_gender, pass_word,
-               user_type, create_time, update_time
-        from user
+
+    <select id="getUserByTel" resultType="User">
+        SELECT user_id FROM user WHERE user_tel = #{userTel}
+    </select>
+
+    <select id="getUserByLogin" resultType="User">
+        SELECT user_id, user_name, user_tel, user_avatar, user_address, user_gender FROM user
+        WHERE user_name = #{userName} AND password = #{password}
     </select>
 </mapper>
