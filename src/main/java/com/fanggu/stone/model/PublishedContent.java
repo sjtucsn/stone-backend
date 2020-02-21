@@ -1,7 +1,5 @@
 package com.fanggu.stone.model;
 
-import java.util.Date;
-
 public class PublishedContent {
     private Integer publishedContentId;
 
@@ -15,9 +13,9 @@ public class PublishedContent {
 
     private String position;
 
-    private Date createTime;
+    private String createTime;
 
-    private Date updateTime;
+    private String updateTime;
 
     private String content;
 
@@ -69,19 +67,19 @@ public class PublishedContent {
         this.position = position;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 

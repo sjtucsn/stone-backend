@@ -1,7 +1,5 @@
 package com.fanggu.stone.model;
 
-import java.util.Date;
-
 public class User {
     private Integer userId;
 
@@ -19,9 +17,9 @@ public class User {
 
     private Byte userType;
 
-    private Date createTime;
+    private String createTime;
 
-    private Date updateTime;
+    private String updateTime;
 
     public Integer getUserId() {
         return userId;
@@ -87,19 +85,19 @@ public class User {
         this.userType = userType;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 }
