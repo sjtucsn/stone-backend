@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanggu.stone.dao.UploadedContentMapper">
+    <resultMap id="BaseResultMap" type="com.fanggu.stone.model.UploadedContent">
+        <id column="uploaded_content_id" jdbcType="INTEGER" property="uploadedContentId" />
+        <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+        <result column="uploader_id" jdbcType="INTEGER" property="uploaderId" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
+        <result column="position" jdbcType="VARCHAR" property="position" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from uploaded_content
+        where uploaded_content_id = #{uploadedContentId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.fanggu.stone.model.UploadedContent">
+        insert into uploaded_content (uploaded_content_id, category_id, uploader_id,
+                                      title, content, image_path, position)
+        values (#{uploadedContentId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{uploaderId,jdbcType=INTEGER},
+                #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{imagePath,jdbcType=VARCHAR},
+                #{position,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.fanggu.stone.model.UploadedContent">
+        update uploaded_content
+        set category_id = #{categoryId,jdbcType=INTEGER},
+            uploader_id = #{uploaderId,jdbcType=INTEGER},
+            title = #{title,jdbcType=VARCHAR},
+            content = #{content,jdbcType=VARCHAR},
+            image_path = #{imagePath,jdbcType=VARCHAR},
+            position = #{position,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where uploaded_content_id = #{uploadedContentId,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select uploaded_content_id, category_id, uploader_id, title, content, image_path,
+               position, create_time, update_time
+        from uploaded_content
+        where uploaded_content_id = #{uploadedContentId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select uploaded_content_id, category_id, uploader_id, title, content, image_path,
+               position, create_time, update_time
+        from uploaded_content
+    </select>
+</mapper>
