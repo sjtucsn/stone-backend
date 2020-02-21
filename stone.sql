@@ -24,8 +24,7 @@ CREATE TABLE category (
     category_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     category_name VARCHAR(20) NOT NULL,
     create_time DATETIME DEFAULT NOW(),
-    update_time TIMESTAMP,
-    memo VARCHAR(255)
+    update_time TIMESTAMP
 );
 
 CREATE TABLE uploaded_content (

@@ -9,8 +9,6 @@ public class Category {
 
     private String updateTime;
 
-    private String memo;
-
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -43,11 +41,4 @@ public class Category {
         this.updateTime = updateTime;
     }
 
-    public String getMemo() {
-        return memo;
-    }
-
-    public void setMemo(String memo) {
-        this.memo = memo;
-    }
 }

@@ -1,36 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fanggu.stone.dao.CategoryMapper">
-    <resultMap id="BaseResultMap" type="com.fanggu.stone.model.Category">
-        <id column="category_id" jdbcType="INTEGER" property="categoryId" />
-        <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-        <result column="memo" jdbcType="VARCHAR" property="memo" />
-    </resultMap>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from category
-        where category_id = #{categoryId,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.fanggu.stone.model.Category">
-        insert into category (category_id, category_name, memo)
-        values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR})
+    <insert id="insertCategory" parameterType="Category">
+        INSERT INTO category (category_name)
+        VALUES (#{categoryName})
     </insert>
-    <update id="updateByPrimaryKey" parameterType="com.fanggu.stone.model.Category">
-        update category
-        set category_name = #{categoryName,jdbcType=VARCHAR},
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            update_time = #{updateTime,jdbcType=TIMESTAMP},
-            memo = #{memo,jdbcType=VARCHAR}
-        where category_id = #{categoryId,jdbcType=INTEGER}
-    </update>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select category_id, category_name, create_time, update_time, memo
-        from category
-        where category_id = #{categoryId,jdbcType=INTEGER}
-    </select>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select category_id, category_name, create_time, update_time, memo
-        from category
+
+    <delete id="deleteCategoryById">
+        DELETE FROM category
+        WHERE category_id = #{categoryId}
+    </delete>
+
+    <select id="listCategories" resultType="Category">
+        SELECT category_id, category_name FROM category
     </select>
 </mapper>

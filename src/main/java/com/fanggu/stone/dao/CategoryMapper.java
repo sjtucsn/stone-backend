@@ -4,13 +4,9 @@ import com.fanggu.stone.model.Category;
 import java.util.List;
 
 public interface CategoryMapper {
-    int deleteByPrimaryKey(Integer categoryId);
+    int insertCategory(Category category);
 
-    int insert(Category record);
+    int deleteCategoryById(Integer categoryId);
 
-    Category selectByPrimaryKey(Integer categoryId);
-
-    List<Category> selectAll();
-
-    int updateByPrimaryKey(Category record);
+    List<Category> listCategories();
 }
