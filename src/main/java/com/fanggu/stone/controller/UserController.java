@@ -20,7 +20,7 @@ public class UserController {
     @Resource
     private UserMapper userMapper;
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/index")
     public List<User> userIndexAction(HttpSession httpSession, String id) {
