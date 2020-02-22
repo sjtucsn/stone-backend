@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,11 +37,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public BasicResponse<User> userLoginAction(String userTel, String password) {
+    public BasicResponse<User> userLoginAction(String userTel, String password, HttpSession httpSession) {
         User user = userMapper.getUserByLogin(userTel, password);
         if (user == null) {
             return new BasicResponse<>(FAIL, "用户名或密码错误");
         } else {
+            httpSession.setAttribute("status", "online");
             return new BasicResponse<>(SUCCESS, user);
         }
     }

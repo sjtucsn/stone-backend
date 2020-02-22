@@ -1,6 +1,7 @@
 package com.fanggu.stone.config;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fanggu.stone.response.BasicResponse;
 import org.apache.catalina.filters.RequestFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +10,13 @@ import org.springframework.stereotype.Component;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.fanggu.stone.constant.ResultCode.NOT_PERMITTED;
 
 @Component
 public class LogFilter implements Filter {
@@ -45,7 +49,19 @@ public class LogFilter implements Filter {
             // 请求开始时间
             Long startTime = System.currentTimeMillis();
             //Spring通过DispatchServlet处理请求
-            chain.doFilter(httpServletRequest, httpServletResponse);
+            HttpSession httpSession = httpServletRequest.getSession();
+            String requestUrl = httpServletRequest.getRequestURI();
+            if (requestUrl.contains("register") || requestUrl.contains("login")) {
+                chain.doFilter(httpServletRequest, httpServletResponse);
+            } else {
+                // 除了register接口和login接口之外，所有接口请求时均需要有cookie
+                if ("online".equals(httpSession.getAttribute("status"))) {
+                    chain.doFilter(httpServletRequest, httpServletResponse);
+                } else {
+                    httpServletResponse.setContentType("application/json");
+                    httpServletResponse.getOutputStream().write(JSONObject.toJSONBytes(new BasicResponse(NOT_PERMITTED, "请先登录后再访问")));
+                }
+            }
             //请求结束时间
             Long endTime = System.currentTimeMillis();
             String params = JSONObject.toJSONString(paramMap);
