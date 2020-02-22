@@ -28,6 +28,7 @@ public class ImageController {
         if (!multipartFile.getContentType().startsWith("image")) {
             return new BasicResponse(PARAM_ERROR, "不支持该图片格式");
         }
+        // 临时图片均保存在/static/tmp/userId/目录下
         File dir = new File(getClass().getClassLoader().getResource("").getPath() + "/static/tmp/" + userId);
         if (!dir.exists()) {
             dir.mkdirs();

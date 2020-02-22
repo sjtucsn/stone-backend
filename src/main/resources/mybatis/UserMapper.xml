@@ -11,7 +11,7 @@
         WHERE user_id = #{userId}
     </update>
 
-    <update id="updateAvatar" parameterType="User">
+    <update id="updateAvatar">
         UPDATE user SET user_avatar = #{userAvatar} WHERE user_id = #{userId}
     </update>
 
@@ -26,6 +26,6 @@
 
     <select id="getUserByLogin" resultType="User">
         SELECT user_id, user_name, user_tel, user_avatar, user_address, user_gender FROM user
-        WHERE user_name = #{userName} AND password = #{password}
+        WHERE user_tel = #{userTel} AND password = #{password}
     </select>
 </mapper>

@@ -36,7 +36,7 @@ public class ArticleController {
             String newPath = "/article/" + article.getArticleId() + "/";
             articleMapper.updateArticleImagePath(article.getArticleId(), newPath);
 
-            // 转移图片位置
+            // 转移图片位置，系统发布的文章图片存储在/static/article/articleId/目录下
             File newFilePath = new File(classPath + "/static" + newPath);
             if (!newFilePath.exists()) {
                 newFilePath.mkdirs();

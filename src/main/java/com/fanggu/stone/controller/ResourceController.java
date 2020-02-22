@@ -34,7 +34,7 @@ public class ResourceController {
             resource.setImagePath(newPath);
             resourceMapper.insertResource(resource);
 
-            // 转移图片位置
+            // 转移图片位置，用户上传图片保存在/static/image/uploaderId/currentTime/目录下
             File newFilePath = new File(classPath + "/static" + newPath);
             if (!newFilePath.exists()) {
                 newFilePath.mkdirs();
