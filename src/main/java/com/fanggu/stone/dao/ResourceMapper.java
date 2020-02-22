@@ -8,9 +8,9 @@ public interface ResourceMapper {
 
     int deleteResourceById(Integer resourceId);
 
-    List<Resource> listContentsByUploaderId(Integer uploaderId);
+    List<Resource> listResourceByUploaderId(Integer uploaderId);
 
-    List<Resource> listContentsByCategoryId(Integer categoryId);
+    List<Resource> listResourceByCategoryId(Integer categoryId);
 
-    List<Resource> listContentsByPage(Integer offset, Integer pageSize);
+    List<Resource> listResourceByPage(Integer offset, Integer pageSize);
 }

@@ -11,7 +11,7 @@
         WHERE resource_id = #{resourceId}
     </delete>
 
-    <select id="listContentsByUploaderId" resultType="Resource">
+    <select id="listResourceByUploaderId" resultType="Resource">
         SELECT resource_id, category_id, category_name, uploader_id, title, content, image_path, position, resource.create_time,
                user.user_name AS uploaderName, user.user_tel AS uploaderTel, user.user_avatar AS uploaderAvatar
         FROM resource
@@ -20,7 +20,7 @@
         ORDER BY resource_id DESC
     </select>
 
-    <select id="listContentsByCategoryId" resultType="Resource">
+    <select id="listResourceByCategoryId" resultType="Resource">
         SELECT resource_id, category_id, category_name, uploader_id, title, content, image_path, position, resource.create_time,
                user.user_name AS uploaderName, user.user_tel AS uploaderTel, user.user_avatar AS uploaderAvatar
         FROM resource
@@ -29,7 +29,7 @@
         ORDER BY resource_id DESC
     </select>
 
-    <select id="listContentsByPage" resultType="Resource">
+    <select id="listResourceByPage" resultType="Resource">
         SELECT resource_id, category_id, category_name, uploader_id, title, content, image_path, position, resource.create_time,
                user.user_name AS uploaderName, user.user_tel AS uploaderTel, user.user_avatar AS uploaderAvatar
         FROM resource

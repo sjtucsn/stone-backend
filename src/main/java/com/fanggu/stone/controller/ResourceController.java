@@ -65,11 +65,11 @@ public class ResourceController {
         String classPath = getClass().getClassLoader().getResource("").getPath();
         List<Resource> resourceList;
         if (uploaderId != null) {
-            resourceList = resourceMapper.listContentsByUploaderId(uploaderId);
+            resourceList = resourceMapper.listResourceByUploaderId(uploaderId);
         } else if (categoryId != null) {
-            resourceList = resourceMapper.listContentsByCategoryId(categoryId);
+            resourceList = resourceMapper.listResourceByCategoryId(categoryId);
         } else {
-            resourceList = resourceMapper.listContentsByPage(pageNo * pageSize, pageSize);
+            resourceList = resourceMapper.listResourceByPage(pageNo * pageSize, pageSize);
         }
         for (Resource resource : resourceList) {
             if (resource.getImagePath() != null) {

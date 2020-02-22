@@ -30,8 +30,8 @@ CREATE TABLE category (
 CREATE TABLE resource (
     resource_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     category_id INT UNSIGNED NOT NULL,
-    uploader_id INT UNSIGNED NOT NULL,
     category_name VARCHAR(20) NOT NULL,
+    uploader_id INT UNSIGNED NOT NULL,
     title VARCHAR(30),
     content VARCHAR(256),
     image_path VARCHAR(50),
@@ -45,6 +45,7 @@ CREATE TABLE resource (
 CREATE TABLE article (
     article_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     category_id INT UNSIGNED NOT NULL,
+    category_name VARCHAR(20) NOT NULL,
     publisher_id INT UNSIGNED NOT NULL,
     title VARCHAR(30),
     content TEXT,
