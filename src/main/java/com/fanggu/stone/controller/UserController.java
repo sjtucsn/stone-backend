@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public BasicResponse<User> userUpdateAction(User user) {
+    public BasicResponse<User> userUpdateAction(@RequestBody User user) {
         userMapper.updateUser(user);
         user = userMapper.getUserById(user.getUserId());
         return new BasicResponse<>(SUCCESS, user);

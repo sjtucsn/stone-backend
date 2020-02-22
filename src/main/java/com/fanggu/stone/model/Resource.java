@@ -1,9 +1,16 @@
 package com.fanggu.stone.model;
 
-public class UploadedContent {
-    private Integer uploadedContentId;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.List;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Resource {
+    private Integer resourceId;
 
     private Integer categoryId;
+
+    private String categoryName;
 
     private Integer uploaderId;
 
@@ -19,12 +26,29 @@ public class UploadedContent {
 
     private String updateTime;
 
-    public Integer getUploadedContentId() {
-        return uploadedContentId;
+    // 非表中结构
+    private String uploaderName;
+
+    private String uploaderTel;
+
+    private String uploaderAvatar;
+
+    private List<String> imageList;
+
+    public Integer getResourceId() {
+        return resourceId;
     }
 
-    public void setUploadedContentId(Integer uploadedContentId) {
-        this.uploadedContentId = uploadedContentId;
+    public void setResourceId(Integer resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Integer getCategoryId() {
@@ -89,5 +113,37 @@ public class UploadedContent {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getUploaderName() {
+        return uploaderName;
+    }
+
+    public void setUploaderName(String uploaderName) {
+        this.uploaderName = uploaderName;
+    }
+
+    public String getUploaderTel() {
+        return uploaderTel;
+    }
+
+    public void setUploaderTel(String uploaderTel) {
+        this.uploaderTel = uploaderTel;
+    }
+
+    public String getUploaderAvatar() {
+        return uploaderAvatar;
+    }
+
+    public void setUploaderAvatar(String uploaderAvatar) {
+        this.uploaderAvatar = uploaderAvatar;
+    }
+
+    public List<String> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<String> imageList) {
+        this.imageList = imageList;
     }
 }
