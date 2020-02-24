@@ -63,7 +63,7 @@ public class ArticleController {
 
     // 获取发布的文章列表，可按上传者Id查看、按资源类别Id查看或者所有见容分页查看
     @GetMapping("/list")
-    public BasicResponse<List<Article>> articleIndexAction(Integer pageNo, Integer pageSize, Integer publisherId, Integer categoryId) {
+    public BasicResponse<List<Article>> articleIndexAction(Integer offset, Integer pageSize, Integer publisherId, Integer categoryId) {
         String classPath = getClass().getClassLoader().getResource("").getPath();
         List<Article> articleList;
         if (publisherId != null) {
@@ -71,7 +71,7 @@ public class ArticleController {
         } else if (categoryId != null) {
             articleList = articleMapper.listArticleByCategoryId(categoryId);
         } else {
-            articleList = articleMapper.listArticleByPage(pageNo * pageSize, pageSize);
+            articleList = articleMapper.listArticleByPage(offset, pageSize);
         }
         for (Article article : articleList) {
             if (article.getImagePath() != null) {

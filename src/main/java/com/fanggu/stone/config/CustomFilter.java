@@ -19,7 +19,7 @@ import java.util.Map;
 import static com.fanggu.stone.constant.ResultCode.NOT_PERMITTED;
 
 @Component
-public class LogFilter implements Filter {
+public class CustomFilter implements Filter {
 
     private static final Logger log = LoggerFactory.getLogger(RequestFilter.class);
 
@@ -40,6 +40,10 @@ public class LogFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+        httpServletResponse.setHeader("Access-Control-Allow-Headers", "*");
+
         String method = httpServletRequest.getMethod();
         if ("GET".equals(method) || "POST".equals(method)) {
             //请求路径
@@ -51,7 +55,7 @@ public class LogFilter implements Filter {
             //Spring通过DispatchServlet处理请求
             HttpSession httpSession = httpServletRequest.getSession();
             String requestUrl = httpServletRequest.getRequestURI();
-            if (requestUrl.contains("register") || requestUrl.contains("login")) {
+            if (requestUrl.contains("register") || requestUrl.contains("login") || true) {
                 chain.doFilter(httpServletRequest, httpServletResponse);
             } else {
                 // 除了register接口和login接口之外，所有接口请求时均需要有cookie

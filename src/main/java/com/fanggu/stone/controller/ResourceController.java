@@ -61,7 +61,7 @@ public class ResourceController {
 
     // 获取资源列表，可按上传者Id查看、按资源类别Id查看或者所有见容分页查看
     @GetMapping("/list")
-    public BasicResponse<List<Resource>> resourceIndexAction(Integer pageNo, Integer pageSize, Integer uploaderId, Integer categoryId) {
+    public BasicResponse<List<Resource>> resourceIndexAction(Integer offset, Integer pageSize, Integer uploaderId, Integer categoryId) {
         String classPath = getClass().getClassLoader().getResource("").getPath();
         List<Resource> resourceList;
         if (uploaderId != null) {
@@ -69,7 +69,7 @@ public class ResourceController {
         } else if (categoryId != null) {
             resourceList = resourceMapper.listResourceByCategoryId(categoryId);
         } else {
-            resourceList = resourceMapper.listResourceByPage(pageNo * pageSize, pageSize);
+            resourceList = resourceMapper.listResourceByPage(offset, pageSize);
         }
         for (Resource resource : resourceList) {
             if (resource.getImagePath() != null) {
