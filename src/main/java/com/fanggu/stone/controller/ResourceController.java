@@ -27,27 +27,37 @@ public class ResourceController {
     @PostMapping("/upload")
     public BasicResponse resourceUploadAction(@RequestBody Resource resource) {
         Integer uploaderId = resource.getUploaderId();
+        if (uploaderId == null) {
+            return new BasicResponse(FAIL, "资源发布失败");
+        }
         String classPath = getClass().getClassLoader().getResource("").getPath();
         File tmpPath = new File(classPath + "/static/tmp/" + uploaderId);
-        if (tmpPath.exists() && tmpPath.list().length > 0) {
-            // 保存上传数据
-            String newPath = "/image/" + uploaderId + "/" + Utils.getCurrentDateTime() + "/";
-            resource.setImagePath(newPath);
-            resourceMapper.insertResource(resource);
+        try {
+            if (tmpPath.exists() && tmpPath.list().length > 0) {
+                // 保存上传数据
+                String newPath = "/image/" + uploaderId + "/" + Utils.getCurrentDateTime() + "/";
+                resource.setImagePath(newPath);
+                resourceMapper.insertResource(resource);
 
-            // 转移图片位置，用户上传图片保存在/static/image/uploaderId/currentTime/目录下
-            File newFilePath = new File(classPath + "/static" + newPath);
-            if (!newFilePath.exists()) {
-                newFilePath.mkdirs();
+                // 转移图片位置，用户上传图片保存在/static/image/uploaderId/currentTime/目录下
+                File newFilePath = new File(classPath + "/static" + newPath);
+                if (!newFilePath.exists()) {
+                    newFilePath.mkdirs();
+                }
+                for (File file : tmpPath.listFiles()) {
+                    file.renameTo(new File(newFilePath.getPath() + "/" + file.getName()));
+                }
+            } else {
+                // 无图片上传，则直接保存数据
+                resourceMapper.insertResource(resource);
             }
+            return new BasicResponse(SUCCESS, "资源上传成功");
+        } catch (Exception e) {
             for (File file : tmpPath.listFiles()) {
-                file.renameTo(new File(newFilePath.getPath() + "/" + file.getName()));
+                file.delete();
             }
-        } else {
-            // 无图片上传，则直接保存数据
-            resourceMapper.insertResource(resource);
+            return new BasicResponse(FAIL, "资源上传失败");
         }
-        return new BasicResponse(SUCCESS, "资源发布成功");
     }
 
     @PostMapping("/delete")

@@ -29,27 +29,37 @@ public class ArticleController {
     @Transactional(rollbackFor = Exception.class)
     public BasicResponse articleUploadAction(@RequestBody Article article) {
         Integer publisherId = article.getPublisherId();
+        if (publisherId == null) {
+            return new BasicResponse(FAIL, "资源发布失败");
+        }
         String classPath = getClass().getClassLoader().getResource("").getPath();
         File tmpPath = new File(classPath + "/static/tmp/" + publisherId);
-        if (tmpPath.exists() && tmpPath.list().length > 0) {
-            // 保存上传数据
-            articleMapper.insertArticle(article);
-            String newPath = "/article/" + article.getArticleId() + "/";
-            articleMapper.updateArticleImagePath(article.getArticleId(), newPath);
+        try {
+            if (tmpPath.exists() && tmpPath.list().length > 0) {
+                // 保存上传数据
+                articleMapper.insertArticle(article);
+                String newPath = "/article/" + article.getArticleId() + "/";
+                articleMapper.updateArticleImagePath(article.getArticleId(), newPath);
 
-            // 转移图片位置，系统发布的文章图片存储在/static/article/articleId/目录下
-            File newFilePath = new File(classPath + "/static" + newPath);
-            if (!newFilePath.exists()) {
-                newFilePath.mkdirs();
+                // 转移图片位置，系统发布的文章图片存储在/static/article/articleId/目录下
+                File newFilePath = new File(classPath + "/static" + newPath);
+                if (!newFilePath.exists()) {
+                    newFilePath.mkdirs();
+                }
+                for (File file : tmpPath.listFiles()) {
+                    file.renameTo(new File(newFilePath.getPath() + "/" + file.getName()));
+                }
+            } else {
+                // 无图片上传，则直接保存数据
+                articleMapper.insertArticle(article);
             }
+            return new BasicResponse(SUCCESS, "资源发布成功");
+        } catch (Exception e) {
             for (File file : tmpPath.listFiles()) {
-                file.renameTo(new File(newFilePath.getPath() + "/" + file.getName()));
+                file.delete();
             }
-        } else {
-            // 无图片上传，则直接保存数据
-            articleMapper.insertArticle(article);
+            return new BasicResponse(FAIL, "资源发布失败");
         }
-        return new BasicResponse(SUCCESS, "资源发布成功");
     }
 
     @PostMapping("/delete")
