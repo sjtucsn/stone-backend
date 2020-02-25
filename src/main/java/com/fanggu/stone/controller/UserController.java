@@ -47,6 +47,16 @@ public class UserController {
         }
     }
 
+    @GetMapping("/info")
+    public BasicResponse<User> getUserInfoAction(Integer userId) {
+        User user = userMapper.getUserById(userId);
+        if (user != null) {
+            return new BasicResponse<>(SUCCESS, user);
+        } else {
+            return new BasicResponse<>(FAIL, "用户不存在");
+        }
+    }
+
     @PostMapping("/update")
     public BasicResponse<User> userUpdateAction(@RequestBody User user) {
         userMapper.updateUser(user);

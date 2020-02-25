@@ -65,14 +65,7 @@ public class ArticleController {
     @GetMapping("/list")
     public BasicResponse<List<Article>> articleIndexAction(Integer offset, Integer pageSize, Integer publisherId, Integer categoryId) {
         String classPath = getClass().getClassLoader().getResource("").getPath();
-        List<Article> articleList;
-        if (publisherId != null) {
-            articleList = articleMapper.listArticleByPublisherId(publisherId);
-        } else if (categoryId != null) {
-            articleList = articleMapper.listArticleByCategoryId(categoryId);
-        } else {
-            articleList = articleMapper.listArticleByPage(offset, pageSize);
-        }
+        List<Article> articleList = articleMapper.listArticleByPage(publisherId, categoryId, offset, pageSize);
         for (Article article : articleList) {
             if (article.getImagePath() != null) {
                 File articleDir = new File(classPath + "/static" + article.getImagePath());

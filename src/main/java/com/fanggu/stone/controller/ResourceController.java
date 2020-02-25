@@ -63,14 +63,7 @@ public class ResourceController {
     @GetMapping("/list")
     public BasicResponse<List<Resource>> resourceIndexAction(Integer offset, Integer pageSize, Integer uploaderId, Integer categoryId) {
         String classPath = getClass().getClassLoader().getResource("").getPath();
-        List<Resource> resourceList;
-        if (uploaderId != null) {
-            resourceList = resourceMapper.listResourceByUploaderId(uploaderId);
-        } else if (categoryId != null) {
-            resourceList = resourceMapper.listResourceByCategoryId(categoryId);
-        } else {
-            resourceList = resourceMapper.listResourceByPage(offset, pageSize);
-        }
+        List<Resource> resourceList = resourceMapper.listResourceByPage(uploaderId, categoryId, offset, pageSize);
         for (Resource resource : resourceList) {
             if (resource.getImagePath() != null) {
                 File resourceDir = new File(classPath + "/static" + resource.getImagePath());

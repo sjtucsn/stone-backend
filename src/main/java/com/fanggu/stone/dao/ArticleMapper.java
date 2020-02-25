@@ -11,9 +11,5 @@ public interface ArticleMapper {
 
     int deleteArticleById(Integer resourceId);
 
-    List<Article> listArticleByPublisherId(Integer publisherId);
-
-    List<Article> listArticleByCategoryId(Integer categoryId);
-
-    List<Article> listArticleByPage(Integer offset, Integer pageSize);
+    List<Article> listArticleByPage(Integer publisherId, Integer categoryId, Integer offset, Integer pageSize);
 }

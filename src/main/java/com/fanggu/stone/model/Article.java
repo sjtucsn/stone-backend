@@ -33,6 +33,8 @@ public class Article {
 
     private String publisherAvatar;
 
+    private Integer publisherGender;
+
     private List<String> imageList;
 
     public Integer getArticleId() {
@@ -137,6 +139,14 @@ public class Article {
 
     public void setPublisherAvatar(String publisherAvatar) {
         this.publisherAvatar = publisherAvatar;
+    }
+
+    public Integer getPublisherGender() {
+        return publisherGender;
+    }
+
+    public void setPublisherGender(Integer publisherGender) {
+        this.publisherGender = publisherGender;
     }
 
     public List<String> getImageList() {

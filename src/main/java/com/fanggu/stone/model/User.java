@@ -14,11 +14,11 @@ public class User {
 
     private String userAddress;
 
-    private int userGender;
+    private Integer userGender;
 
     private String password;
 
-    private int userType;
+    private Integer userType;
 
     private String createTime;
 
@@ -64,11 +64,11 @@ public class User {
         this.userAddress = userAddress;
     }
 
-    public int getUserGender() {
+    public Integer getUserGender() {
         return userGender;
     }
 
-    public void setUserGender(int userGender) {
+    public void setUserGender(Integer userGender) {
         this.userGender = userGender;
     }
 
@@ -80,11 +80,11 @@ public class User {
         this.password = password;
     }
 
-    public int getUserType() {
+    public Integer getUserType() {
         return userType;
     }
 
-    public void setUserType(int userType) {
+    public void setUserType(Integer userType) {
         this.userType = userType;
     }
 

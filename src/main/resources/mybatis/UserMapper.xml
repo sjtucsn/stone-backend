@@ -16,7 +16,7 @@
     </update>
 
     <select id="getUserById" resultType="User">
-        SELECT user_id, user_name, user_tel, user_avatar, user_address, user_gender FROM user
+        SELECT user_id, user_name, user_tel, user_avatar, user_address, user_gender, user_type FROM user
         WHERE user_id = #{user_id}
     </select>
 
@@ -25,7 +25,7 @@
     </select>
 
     <select id="getUserByLogin" resultType="User">
-        SELECT user_id, user_name, user_tel, user_avatar, user_address, user_gender FROM user
+        SELECT user_id, user_name, user_tel, user_avatar, user_address, user_gender, user_type FROM user
         WHERE user_tel = #{userTel} AND password = #{password}
     </select>
 </mapper>

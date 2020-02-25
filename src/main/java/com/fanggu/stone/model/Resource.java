@@ -33,6 +33,8 @@ public class Resource {
 
     private String uploaderAvatar;
 
+    private Integer uploaderGender;
+
     private List<String> imageList;
 
     public Integer getResourceId() {
@@ -137,6 +139,14 @@ public class Resource {
 
     public void setUploaderAvatar(String uploaderAvatar) {
         this.uploaderAvatar = uploaderAvatar;
+    }
+
+    public Integer getUploaderGender() {
+        return uploaderGender;
+    }
+
+    public void setUploaderGender(Integer uploaderGender) {
+        this.uploaderGender = uploaderGender;
     }
 
     public List<String> getImageList() {

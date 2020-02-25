@@ -11,29 +11,20 @@
         WHERE resource_id = #{resourceId}
     </delete>
 
-    <select id="listResourceByUploaderId" resultType="Resource">
-        SELECT resource_id, category_id, category_name, uploader_id, title, content, image_path, position, resource.create_time,
-               user.user_name AS uploaderName, user.user_tel AS uploaderTel, user.user_avatar AS uploaderAvatar
-        FROM resource
-        LEFT JOIN user ON resource.uploader_id = user.user_id
-        WHERE uploader_id = #{uploaderId}
-        ORDER BY resource_id DESC
-    </select>
-
-    <select id="listResourceByCategoryId" resultType="Resource">
-        SELECT resource_id, category_id, category_name, uploader_id, title, content, image_path, position, resource.create_time,
-               user.user_name AS uploaderName, user.user_tel AS uploaderTel, user.user_avatar AS uploaderAvatar
-        FROM resource
-        LEFT JOIN user ON resource.uploader_id = user.user_id
-        WHERE category_id = #{categoryId}
-        ORDER BY resource_id DESC
-    </select>
-
     <select id="listResourceByPage" resultType="Resource">
         SELECT resource_id, category_id, category_name, uploader_id, title, content, image_path, position, resource.create_time,
-               user.user_name AS uploaderName, user.user_tel AS uploaderTel, user.user_avatar AS uploaderAvatar
+               user.user_name AS uploaderName, user.user_tel AS uploaderTel, user.user_avatar AS uploaderAvatar,
+               user.user_gender AS uploader_gender
         FROM resource
         LEFT JOIN user ON resource.uploader_id = user.user_id
+        <where>
+            <if test="uploaderId != null">
+                AND uploader_id = #{uploaderId}
+            </if >
+            <if test="categoryId != null">
+                AND category_id = #{categoryId}
+            </if >
+        </where>
         ORDER BY resource_id DESC
         LIMIT #{offset}, #{pageSize}
     </select>
