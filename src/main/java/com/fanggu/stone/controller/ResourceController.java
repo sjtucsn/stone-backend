@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.fanggu.stone.constant.ResultCode.FAIL;
@@ -69,12 +70,19 @@ public class ResourceController {
                 File resourceDir = new File(classPath + "/static" + resource.getImagePath());
                 if (resourceDir.exists()) {
                     String[] fileNameList = resourceDir.list();
-                    List<String> relativePathNameList = new ArrayList<>();
+                    Arrays.sort(fileNameList);
+                    List<String> imageList = new ArrayList<>();
+                    List<String> thumbnailList = new ArrayList<>();
                     for (String fileName : fileNameList) {
-                        relativePathNameList.add(resource.getImagePath() + fileName);
+                        if (fileName.startsWith("thumbnail.")) {
+                            thumbnailList.add(resource.getImagePath() + fileName);
+                        } else {
+                            imageList.add(resource.getImagePath() + fileName);
+                        }
                     }
                     // 构造相关图片路径返回给前端
-                    resource.setImageList(relativePathNameList);
+                    resource.setThumbnailList(thumbnailList);
+                    resource.setImageList(imageList);
                 }
             }
         }

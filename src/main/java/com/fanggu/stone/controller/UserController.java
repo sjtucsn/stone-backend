@@ -3,6 +3,7 @@ package com.fanggu.stone.controller;
 import com.fanggu.stone.dao.UserMapper;
 import com.fanggu.stone.model.User;
 import com.fanggu.stone.response.BasicResponse;
+import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,9 +82,14 @@ public class UserController {
         }
         int size = avatarDir.list().length;
         String avatarPath = "/avatar/" + userId + "/" + size + "."  + avatar.getOriginalFilename().split("\\.")[1];
-        // 更新头像信息
-        userMapper.updateAvatar(userId, avatarPath);
-        avatar.transferTo(new File(classPath + "/static" + avatarPath));
+        String thumbnailPath = "/avatar/" + userId + "/thumbnail." + size + "."  + avatar.getOriginalFilename().split("\\.")[1];
+        // 更新头像信息，保存的是缩略图的地址
+        userMapper.updateAvatar(userId, thumbnailPath);
+        File targetFile = new File(classPath + "/static" + avatarPath);
+        File thumbnailFile = new File(classPath + "/static" + thumbnailPath);
+        avatar.transferTo(targetFile);
+        // 创建头像缩略图
+        Thumbnails.of(targetFile).size(200, 200).toFile(thumbnailFile);
         return new BasicResponse(SUCCESS, "头像更换成功!");
     }
 }

@@ -35,6 +35,8 @@ public class Article {
 
     private Integer publisherGender;
 
+    private List<String> thumbnailList;
+
     private List<String> imageList;
 
     public Integer getArticleId() {
@@ -147,6 +149,14 @@ public class Article {
 
     public void setPublisherGender(Integer publisherGender) {
         this.publisherGender = publisherGender;
+    }
+
+    public List<String> getThumbnailList() {
+        return thumbnailList;
+    }
+
+    public void setThumbnailList(List<String> thumbnailList) {
+        this.thumbnailList = thumbnailList;
     }
 
     public List<String> getImageList() {

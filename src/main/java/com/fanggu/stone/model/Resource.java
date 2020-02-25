@@ -35,6 +35,8 @@ public class Resource {
 
     private Integer uploaderGender;
 
+    private List<String> thumbnailList;
+
     private List<String> imageList;
 
     public Integer getResourceId() {
@@ -147,6 +149,14 @@ public class Resource {
 
     public void setUploaderGender(Integer uploaderGender) {
         this.uploaderGender = uploaderGender;
+    }
+
+    public List<String> getThumbnailList() {
+        return thumbnailList;
+    }
+
+    public void setThumbnailList(List<String> thumbnailList) {
+        this.thumbnailList = thumbnailList;
     }
 
     public List<String> getImageList() {
