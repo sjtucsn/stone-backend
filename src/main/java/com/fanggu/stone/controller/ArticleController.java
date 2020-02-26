@@ -82,6 +82,7 @@ public class ArticleController {
                 File articleDir = new File(classPath + "/static" + article.getImagePath());
                 if (articleDir.exists()) {
                     String[] fileNameList = articleDir.list();
+                    // 文件名按顺序排好，保证原图和缩略图顺序一致
                     Arrays.sort(fileNameList);
                     List<String> imageList = new ArrayList<>();
                     List<String> thumbnailList = new ArrayList<>();
@@ -92,7 +93,7 @@ public class ArticleController {
                             imageList.add(article.getImagePath() + fileName);
                         }
                     }
-                    // 构造相关图片路径返回给前端
+                    // 构造原图和缩略图的路径列表返回给前端
                     article.setThumbnailList(thumbnailList);
                     article.setImageList(imageList);
                 }

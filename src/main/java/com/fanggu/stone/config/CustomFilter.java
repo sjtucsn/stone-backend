@@ -55,6 +55,7 @@ public class CustomFilter implements Filter {
             //Spring通过DispatchServlet处理请求
             HttpSession httpSession = httpServletRequest.getSession();
             String requestUrl = httpServletRequest.getRequestURI();
+            // 基于redis的http session并不适合作为会话判断，因为前端每次请求都是一个不同的session，而且移动端不支持cookie
             if (requestUrl.contains("register") || requestUrl.contains("login") || true) {
                 chain.doFilter(httpServletRequest, httpServletResponse);
             } else {

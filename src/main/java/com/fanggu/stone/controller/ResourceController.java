@@ -80,6 +80,7 @@ public class ResourceController {
                 File resourceDir = new File(classPath + "/static" + resource.getImagePath());
                 if (resourceDir.exists()) {
                     String[] fileNameList = resourceDir.list();
+                    // 文件名按顺序排好，保证原图和缩略图顺序一致
                     Arrays.sort(fileNameList);
                     List<String> imageList = new ArrayList<>();
                     List<String> thumbnailList = new ArrayList<>();

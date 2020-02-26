@@ -21,6 +21,7 @@ public class ImageController {
 
     private static Logger logger = LoggerFactory.getLogger(ImageController.class);
 
+    // 临时图片的上传和保存接口，index代表图片在九宫格中的顺序，保证上传和查看时的顺序一致
     @PostMapping("/upload")
     public BasicResponse imageUploadAction(@RequestParam("image") MultipartFile multipartFile, String userId, Integer index) {
         if (userId == null || multipartFile == null) {

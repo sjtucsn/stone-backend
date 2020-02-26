@@ -29,6 +29,7 @@ public class UserController {
     @PostMapping("/register")
     public BasicResponse userRegisterAction(@RequestBody User user) {
         if (userMapper.getUserByTel(user.getUserTel()) == null) {
+            // 用户注册时的默认类别为普通用户 userType若为1则为方古用户
             user.setUserType(0);
             userMapper.insertUser(user);
             return new BasicResponse(SUCCESS, "注册成功");
@@ -48,6 +49,7 @@ public class UserController {
         }
     }
 
+    // 根据id获取用户信息
     @GetMapping("/info")
     public BasicResponse<User> getUserInfoAction(Integer userId) {
         User user = userMapper.getUserById(userId);
@@ -58,6 +60,7 @@ public class UserController {
         }
     }
 
+    // 根据电话号码搜索用户
     @GetMapping("/search")
     public BasicResponse<User> searchUserAction(String userTel) {
         User user = userMapper.getUserByTel(userTel);
@@ -68,6 +71,7 @@ public class UserController {
         }
     }
 
+    // 用户基本信息更新
     @PostMapping("/update")
     public BasicResponse<User> userUpdateAction(@RequestBody User user) {
         userMapper.updateUser(user);
@@ -75,6 +79,7 @@ public class UserController {
         return new BasicResponse<>(SUCCESS, user);
     }
 
+    // 用户类别更新 1 方古管理员 0 普通用户
     @PostMapping("/authority/update")
     public BasicResponse<User> userAuthorityUpdateAction(@RequestBody User user) {
         userMapper.updateUserAuthority(user);
@@ -82,6 +87,7 @@ public class UserController {
         return new BasicResponse<>(SUCCESS, user);
     }
 
+    // 用户头像上传
     @PostMapping("/avatar/change")
     @Transactional(rollbackFor = Exception.class)
     public BasicResponse avatarChangeAction(MultipartFile avatar, Integer userId) throws IOException{
