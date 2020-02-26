@@ -11,6 +11,10 @@
         WHERE category_id = #{categoryId}
     </delete>
 
+    <select id="getCategoryByName" resultType="Category">
+        SELECT category_id, category_name FROM category WHERE category_name = #{categoryName}
+    </select>
+
     <select id="listCategories" resultType="Category">
         SELECT category_id, category_name FROM category
     </select>

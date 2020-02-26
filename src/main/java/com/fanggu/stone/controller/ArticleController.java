@@ -63,7 +63,7 @@ public class ArticleController {
     }
 
     @PostMapping("/delete")
-    public BasicResponse articleDeleteAction(int articleId) {
+    public BasicResponse articleDeleteAction(Integer articleId) {
         int affectedRows = articleMapper.deleteArticleById(articleId);
         if (affectedRows == 1) {
             return new BasicResponse<>(SUCCESS, "删除资源成功");

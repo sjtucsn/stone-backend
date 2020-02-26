@@ -11,6 +11,11 @@
         WHERE user_id = #{userId}
     </update>
 
+    <update id="updateUserAuthority" parameterType="User">
+        UPDATE user SET user_type = #{userType}
+        WHERE user_id = #{userId}
+    </update>
+
     <update id="updateAvatar">
         UPDATE user SET user_avatar = #{userAvatar} WHERE user_id = #{userId}
     </update>
@@ -21,7 +26,7 @@
     </select>
 
     <select id="getUserByTel" resultType="User">
-        SELECT user_id FROM user WHERE user_tel = #{userTel}
+        SELECT user_id, user_name, user_tel, user_avatar, user_address, user_gender, user_type FROM user WHERE user_tel = #{userTel}
     </select>
 
     <select id="getUserByLogin" resultType="User">

@@ -61,7 +61,7 @@ public class ResourceController {
     }
 
     @PostMapping("/delete")
-    public BasicResponse resourceDeleteAction(int resourceId) {
+    public BasicResponse resourceDeleteAction(Integer resourceId) {
         int affectedRows = resourceMapper.deleteResourceById(resourceId);
         if (affectedRows == 1) {
             return new BasicResponse<>(SUCCESS, "删除资源成功");

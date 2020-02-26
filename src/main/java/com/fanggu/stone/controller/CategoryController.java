@@ -24,12 +24,16 @@ public class CategoryController {
 
     @PostMapping("/create")
     public BasicResponse categoryCreateAction(@RequestBody Category category) {
-        categoryMapper.insertCategory(category);
-        return new BasicResponse(SUCCESS, "创建成功");
+        if (categoryMapper.getCategoryByName(category.getCategoryName()) == null) {
+            categoryMapper.insertCategory(category);
+            return new BasicResponse(SUCCESS, "创建成功");
+        } else {
+            return new BasicResponse(FAIL, "类别名称不能重复");
+        }
     }
 
     @PostMapping("/delete")
-    public BasicResponse categoryDeleteAction(int categoryId) {
+    public BasicResponse categoryDeleteAction(Integer categoryId) {
         int affectedRows = categoryMapper.deleteCategoryById(categoryId);
         if (affectedRows == 1) {
             return new BasicResponse<>(SUCCESS, "删除类别成功");

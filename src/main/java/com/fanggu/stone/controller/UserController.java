@@ -58,9 +58,26 @@ public class UserController {
         }
     }
 
+    @GetMapping("/search")
+    public BasicResponse<User> searchUserAction(String userTel) {
+        User user = userMapper.getUserByTel(userTel);
+        if (user != null) {
+            return new BasicResponse<>(SUCCESS, user);
+        } else {
+            return new BasicResponse<>(FAIL, "用户不存在");
+        }
+    }
+
     @PostMapping("/update")
     public BasicResponse<User> userUpdateAction(@RequestBody User user) {
         userMapper.updateUser(user);
+        user = userMapper.getUserById(user.getUserId());
+        return new BasicResponse<>(SUCCESS, user);
+    }
+
+    @PostMapping("/authority/update")
+    public BasicResponse<User> userAuthorityUpdateAction(@RequestBody User user) {
+        userMapper.updateUserAuthority(user);
         user = userMapper.getUserById(user.getUserId());
         return new BasicResponse<>(SUCCESS, user);
     }

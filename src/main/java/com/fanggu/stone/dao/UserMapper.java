@@ -7,6 +7,8 @@ public interface UserMapper {
 
     int updateUser(User user);
 
+    int updateUserAuthority(User user);
+
     int updateAvatar(Integer userId, String userAvatar);
 
     User getUserById(Integer userId);
